@@ -1,0 +1,61 @@
+<div class="container" ng-controller="MainController as ctrl" style="height: 1000px; width: 100%; margin: 0px 0px">
+    <snap-content ng-style="ctrl.maxWidth == 0 && {'height': '40px', 'width': '40px'} || {'height': '40px', 'width': '40px', 'margin-left': '2.5%'}">
+
+        <a ng-click="ctrl.displayNav()">
+            <i ng-hide="ctrl.maxWidth != 0" class="fa fa-bars fa-2x" ></i>
+            <i ng-show="ctrl.maxWidth != 0" class="fa fa-times fa-2x" ></i>
+        </a>
+    </snap-content>
+    <snap-drawers>
+        <snap-drawer ng-if="ctrl.navOpen" style="background: rgba(0, 0, 0, .6); height: 100%; width: 2.5%">
+            <div style="height: 100px"></div>
+            <label style="color: lightseagreen;">
+                <div ng-click="ctrl.chooseLatest()" class="menu" style="position: absolute">
+                    <label class="list" style="font-size: larger">&nbsp;&nbsp;&nbsp;Latest</label>
+                    <i class="fa fa-film chosen" aria-hidden="true" style="color: white;padding: 10px 10px 10px 10px; font-size: 150%"></i>
+                </div><br><br>
+                <div class="menu1" style="margin-top: 0.5%;">
+                    <div class="list1">
+                        <label ng-click="ctrl.chooseLang(0)" style="font-size: larger">Languages</label><br>
+                        <label class="chosen" style="margin-bottom: 0px;margin-left: 5% " ng-click="ctrl.chooseLang(0)">All</label><br>
+                        <label class="chosen" style="margin-bottom: 0px;margin-left: 5%" ng-click="ctrl.chooseLang(1)">English</label><br>
+                        <label class="chosen" style="margin-bottom: 0px;margin-left: 5%" ng-click="ctrl.chooseLang(2)">Tamil</label>
+                    </div>
+                    <img src="../images/languages.png" style="height: 35px; width: 25px;padding-top: 10px" />
+                </div><br><br>
+                <div class="menu1" style="margin-top: 1%;">
+                    <div class="list2">
+                        <label ng-click="ctrl.chooseGenre(0)" style="font-size: larger">Genre</label><br>
+                        <label class="chosen" style="margin-bottom: 0px;margin-left: 5%" ng-click="ctrl.chooseGenre(0)">All</label><br>
+                        <label class="chosen" style="margin-bottom: 0px;margin-left: 5%" ng-click="ctrl.chooseGenre(1)">Action</label><br>
+                        <label class="chosen" style="margin-bottom: 0px;margin-left: 5%" ng-click="ctrl.chooseGenre(2)">Crime</label><br>
+                        <label class="chosen" style="margin-bottom: 0px;margin-left: 5%" ng-click="ctrl.chooseGenre(3)">Drama</label><br>
+                        <label class="chosen" style="margin-bottom: 0px;margin-left: 5%" ng-click="ctrl.chooseGenre(4)">Comedy</label><br>
+                    </div>
+                    <img class="menu1-img" src="../images/genre.jpg" style="height: 35px; width: 25px; padding-top: 10px" />
+                </div><br><br>
+                <div ng-click="ctrl.chooseComingSoon()" class="menu" style="margin-top: 80%;">
+                    <label class="list" style="font-size: larger">&nbsp;&nbsp;&nbsp;Coming Soon</label>
+                    <img src="../images/clapper-board.png" style="height: 35px; width: 35px; padding-top: 10px; padding-left: 10px" />
+                </div>
+            </label>
+        </snap-drawer>
+    </snap-drawers>
+    <div style="height: 145px"></div>
+    <div class="row" style="margin-left: 20%; margin-right: 15%">
+        <div class="column col-md-10" style="height: 550px; margin-top: 7%;margin-left: 0%; ">
+            <div class="row" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center;align-items: center;">
+                <div class="column col-md-3 overlay-div" ng-repeat="movie in ctrl.movieList" style=" margin-left: 7%; margin-top: 3%;  height: 100px;padding-left: 0px; "
+                     ng-if="(ctrl.langFilter == 0 && ctrl.genreFilter == 0 && ctrl.latestFilter == 0 && ctrl.comingSoonFilter == 0 && movie.comingSoon == 0) || (((movie.language.id == ctrl.langFilter) || (movie.genre.id == ctrl.genreFilter) || (ctrl.latestFilter == 1 && movie.latest == 1)) && movie.comingSoon == 0) || (ctrl.comingSoonFilter == 1 && movie.comingSoon == 1)">
+                    <div class="overlay"><b>{{movie.name}}<br>{{movie.language.name}}<br>{{movie.genre.name}}<br>{{movie.rating}}<br>{{movie.runtime}}</b></div>
+                    <div id="background" style="background: url({{movie.imageUrl}}) no-repeat; background-size: 100% 100%;height: 100px; text-align: center"></div>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+
+
+
+</style>
